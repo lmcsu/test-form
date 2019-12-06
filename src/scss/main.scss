@@ -1,0 +1,99 @@
+// подключение normalize.css для сброса дефолтных стилей браузера
+@import '~normalize.css/normalize';
+
+// импорт стилей компонентов
+@import '_button';
+@import '_checkbox';
+@import '_error-tooltip';
+@import '_field';
+@import '_svg';
+@import '_recaptcha';
+
+html,
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #333;
+}
+
+// обёртка для всего содержимого страницы
+.content {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// основной блок формы
+.form {
+    background: #eee;
+    max-width: 500px;
+    width: 100%;
+    margin: 20px auto;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    box-sizing: border-box;
+    transform: scale(1);
+    opacity: 1;
+    transition: transform $animation-speed, opacity $animation-speed;
+
+    // заголовок формы
+    &__caption {
+        text-align: center;
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 32px;
+        color: #222;
+    }
+
+    // блок с управляющими элементами
+    &__controls {
+        margin: 10px 0;
+    }
+
+    // поля ввода текста
+    &__field {
+        margin-bottom: 10px;
+    }
+
+    // поле для Google reCaptcha
+    &__recaptcha {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    // кнопка отправки
+    &__button {
+        margin-bottom: 10px;
+    }
+
+    // модификатор для скрытия формы после отправки
+    &_hidden {
+        transform: scale(0.7);
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+// блок после отправки формы
+.success {
+    background: #eee;
+    margin: 20px auto;
+    box-shadow: 0 0 10px 0 $color-active;
+    border-radius: 20px;
+    padding: 40px;
+    position: absolute;
+
+    // сообщение
+    &__message {
+        font-size: 24px;
+        line-height: 29px;
+        color: $color-text;
+    }
+
+    // модификатор для скрытия блока
+    &_hidden {
+        display: none;
+    }
+}

@@ -1,0 +1,65 @@
+//- подключение svg изображений из общего файла
+mixin svg(name)
+    svg.svg&attributes(attributes)
+        use(xlink:href=`${baseDir}img/sprites.svg#${name}`)
+    block
+
+//- всплывающие подсказки с сообщениями об ошибках
+mixin error-tooltip
+    +b.error-tooltip&attributes(attributes)
+        +e.__tail
+        +e.__message
+    block
+
+//- кастомные поля для ввода текста
+mixin field(name, value, type, placeholder, icon, required)
+    -
+        name = name || false
+        value = value || false
+        type = type || 'text' // может иметь значение "textarea", в этом случае элемент поля будет соответствующий
+        placeholder = placeholder || '' // текст для кастомного placeholder
+        icon = icon || false // название файла иконки, false для отключения иконки
+        required = required || false
+        isTextarea = type === 'textarea'
+        inputTagName = isTextarea ? 'textarea' : 'input'
+    +b.field&attributes(attributes)(class=(isTextarea ? '_is-textarea' : false) class=(icon !== false ? '_has-icon' : false))
+        +e.__wrapper
+            +e.placeholder= placeholder
+            if icon !== false
+                +e.__icon
+                    +svg(icon)
+            +e(inputTagName).__input(name=name value=value type=(isTextarea ? false : type) required=required)
+        +error-tooltip
+        block
+
+//- кастомный чекбокс
+mixin checkbox(name, checked, caption, required)
+    +b.checkbox&attributes(attributes)
+        +e('label').__label
+            +e('div').__box-wrapper
+                +e('input').__input(name=name type="checkbox" checked=checked required=required)
+                +e.__box
+                    +svg('checkbox')
+            +e.__caption= caption
+        +error-tooltip
+        block
+
+//- кастомная кнопка
+mixin button(caption, type)
+    - type = type || false
+    +b('button').button&attributes(attributes)(type=type)
+        +e.__caption= caption
+        +e.__loader
+        +error-tooltip.__tooltip
+        block
+
+//- компонент формы для Google reCaptcha
+mixin recaptcha(siteKey, caption)
+    - caption = caption || false
+    +b.recaptcha&attributes(attributes)
+        if caption !== false
+            +e.__caption= caption
+        +e.__box
+            .g-recaptcha(data-sitekey=siteKey)
+            +error-tooltip.__tooltip
+        block

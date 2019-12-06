@@ -1,0 +1,118 @@
+// импорт переменных
+@import '_vars';
+
+// основные значения компонента
+$field-height: 54px;
+$field-height-textarea: 120px;
+$field-padding-hor: 15px;
+$field-padding-ver: 15px;
+$field-icon-size: 30px;
+$field-background: $input-background;
+$field-border-color: $input-border-color;
+$field-border-width: $input-border-width;
+$field-border-radius: 10px;
+$field-font-size: 18px;
+
+// поле для ввода текста
+.field {
+    padding-top: 18px;
+
+    // обёртка для input, иконки и placeholder
+    &__wrapper {
+        position: relative;
+    }
+
+    // нативный элемент, <input> или <textarea>
+    &__input {
+        width: 100%;
+        height: $field-height;
+        box-sizing: border-box;
+        border: $field-border-width solid $field-border-color;
+        background: $field-background;
+        font-size: $field-font-size;
+        border-radius: $field-border-radius;
+        padding: $field-padding-ver $field-padding-hor;
+        outline: none;
+        resize: none;
+        display: block;
+        transition: border-color $animation-speed;
+    }
+
+    // изменение высоты для textarea
+    &_is-textarea &__input {
+        height: $field-height-textarea;
+    }
+
+    // изменение цвета границ input при фокусе
+    &_focused &__input {
+        border-color: $color-active;
+    }
+
+    // изменение цвета границ input при ошибке
+    &_error &__input {
+        border-color: $color-error;
+    }
+
+    // изменение отступа input, если есть иконка
+    &_has-icon &__input {
+        padding-left: $field-icon-size + ($field-padding-hor * 2);
+    }
+
+    // кастомный placeholder
+    &__placeholder {
+        position: absolute;
+        font-size: $field-font-size;
+        color: #666;
+        line-height: $field-height - ($field-padding-ver * 2);
+        left: $field-padding-hor;
+        pointer-events: none;
+        top: $field-padding-ver;
+        transition: font-size $animation-speed, color $animation-speed, top $animation-speed, left $animation-speed;
+    }
+
+    // изменение отступа placeholder, если есть иконка
+    &_has-icon &__placeholder {
+        left: $field-icon-size + ($field-padding-hor * 2);
+    }
+
+    // позиционирование placeholder над input при модификаторе has-content
+    &_has-content &__placeholder {
+        color: #222;
+        font-size: 14px;
+        line-height: 18px;
+        top: -18px;
+        left: 0;
+    }
+
+    // изменение цвета placeholder при фокусе
+    &_focused &__placeholder {
+        color: $color-active;
+    }
+
+    // изменение цвета placeholder при ошибке
+    &_error &__placeholder {
+        color: $color-error;
+    }
+
+    // иконка
+    &__icon {
+        position: absolute;
+        width: $field-icon-size;
+        height: $field-icon-size;
+        fill: $field-border-color;
+        left: $field-padding-hor;
+        top: ($field-height - $field-icon-size) / 2;
+        pointer-events: none;
+        transition: fill $animation-speed;
+    }
+
+    // изменение цвета иконки при фокусе
+    &_focused &__icon {
+        fill: $color-active;
+    }
+
+    // изменение цвета иконки при ошибке
+    &_error &__icon {
+        fill: $color-error;
+    }
+}

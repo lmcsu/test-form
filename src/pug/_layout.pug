@@ -1,0 +1,26 @@
+//- подключаем библиотеку bemto для удобной работы с БЕМ
+include ../../node_modules/bemto.pug/bemto
+
+//- иморт компонентов
+include _components
+
+block vars
+    - let baseDir = ''; // базовая директория размещения проекта
+    - let viewport = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
+
+doctype html
+html(lang="ru")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content=viewport)
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=cyrillic")
+        link(rel="stylesheet" href=`${baseDir}css/main.css?v=${Date.now()}`)
+        block styles
+        title
+            block title
+    body
+        block content
+        script(src=`${baseDir}js/vendor.js?v=${Date.now()}`)
+        script(src=`${baseDir}js/main.js?v=${Date.now()}`)
+        block scripts

@@ -1,0 +1,79 @@
+// импорт переменных
+@import '_vars';
+
+// основные значения компонента
+$button-padding: 12px;
+$button-loader-size: 30px;
+$button-loader-border-width: 5px;
+
+// кнопка
+.button {
+    position: relative;
+    border: none;
+    display: block;
+    width: 100%;
+    background: $color-active;
+    outline: none;
+    cursor: pointer;
+    padding: $button-padding;
+    border-radius: 10px;
+    transition: background-color $animation-speed;
+
+    // цвет при наведении и в состоянии загрузки
+    &:hover,
+    &_loading {
+        background-color: lighten($color-active, 10);
+    }
+
+    // текст на кнопке
+    &__caption {
+        color: #fff;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 700;
+    }
+
+    // отключение отображения текста в состоянии загрузки
+    &_loading &__caption {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    // спиннер для состояния загрузки
+    &__loader {
+        border: $button-loader-border-width solid #f3f3f3;
+        border-top: $button-loader-border-width solid #3498db;
+        border-radius: 50%;
+        width: $button-loader-size;
+        height: $button-loader-size;
+        box-sizing: border-box;
+        animation: button__loader 1s linear infinite;
+        display: none;
+        position: absolute;
+        left: 50%;
+        margin-left: - ($button-loader-size / 2);
+        top: 50%;
+        margin-top: - ($button-loader-size / 2);
+    }
+
+    // анимация спиннера
+    @keyframes button__loader {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    // отображение спиннера при модификаторе loading
+    &_loading &__loader {
+        display: block;
+    }
+
+    // позиционирование подсказки с текстом об ошибке
+    &__tooltip {
+        top: 100%;
+    }
+}

@@ -1,0 +1,24 @@
+// блок для Google reCaptcha
+.recaptcha {
+    // заголовок блока
+    &__caption {
+        text-align: center;
+        color: $color-text;
+        font-size: 16px;
+        line-height: 19px;
+        margin-bottom: 4px;
+    }
+
+    // обёртка для содержимого, установленного библиотекой
+    &__box {
+        min-height: 78px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    // позиционирование всплывающего сообщения об ошибке
+    &__tooltip {
+        top: 100%;
+    }
+}

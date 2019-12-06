@@ -1,0 +1,12 @@
+{
+    "SITE_TITLE": "test-form",
+    "RECAPTCHA_SITE_KEY": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+    "RECAPTCHA_SECRET_KEY": "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
+    "DB_DRIVER": "mysql",
+    "DB_CHARSET": "utf8mb4",
+    "DB_HOST": "localhost",
+    "DB_PORT": 3306,
+    "DB_NAME": "test-form",
+    "DB_USER": "test-form",
+    "DB_PASSWORD": "test-form"
+}

@@ -1,0 +1,33 @@
+extends _layout
+
+append vars
+    - SITE_TITLE = SITE_TITLE || '' // название сайта из настроек
+    - RECAPTCHA_SITE_KEY = RECAPTCHA_SITE_KEY || false // ключ сайта Google reCaptcha из настроек
+    - viewport = 'width=600'
+
+block title
+    = SITE_TITLE
+
+append content
+    .content
+        //- основной блок формы
+        +b.form
+            +e.caption
+                | Заполните форму
+            form(action=`${baseDir}form_hook.php` method="post")
+                +e.__controls
+                    +field('name', '', 'text', 'Введите ваше имя:', 'user').__field
+                    +field('email', '', 'email', 'Введите ваш e-mail:', 'email').__field
+                    +field('message', '', 'textarea', 'Введите ваше сообщение:', 'chat').__field
+                    if RECAPTCHA_SITE_KEY !== false
+                        +recaptcha(RECAPTCHA_SITE_KEY, 'Подтвердите, что вы не робот:').__recaptcha
+                    +button('Отправить', 'submit').__button
+                    +checkbox('policy', false, 'Я даю своё согласие на обработку моих персональных данных').__checkbox
+        //- блок после отправки формы
+        +b.success._hidden
+            +e.__message
+
+append scripts
+    //- если установлен ключ сайта Google reCaptcha, то подключаем API
+    if RECAPTCHA_SITE_KEY !== false
+        script(src="https://www.google.com/recaptcha/api.js?hl=ru" async defer)
