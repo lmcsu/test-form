@@ -10,7 +10,7 @@
     "author": "Alexander Berezin <alex@lmcx.ru> (https://letmecode.ru)",
     "license": "UNLICENSED",
     "dependencies": {
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "jquery-form": "^4.2.2",
         "normalize.css": "^8.0.1"
     },
